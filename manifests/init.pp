@@ -33,6 +33,12 @@
 #   Groups of users, used by getgrent() and related functions.
 #   *Variant* (defaults to $nsswitch::params::group_default)
 #
+# [*group_compat*]
+#
+#   Group pseudo-database for compatibility mode. This parameter should
+#   only be set if group is set to "compat".
+#   *Variant* (defaults to $nsswitch::params::group_compat_default)
+#
 # [*gshadow*]
 #
 #   Shadow groups, used by getspnam() and related functions.
@@ -64,6 +70,13 @@
 #   User passwords, used by getpwent() and related functions.
 #   *Variant* (defaults to $nsswitch::params::passwd_default)
 #
+#
+# [*passwd_compat*]
+#
+#   Passwd pseudo-database for compatibility mode. This parameter should
+#   only be set if passwd is set to "compat".
+#   *Variant* (defaults to $nsswitch::params::passwd_compat_default)
+#
 # [*protocols*]
 #
 #   Network protocols, used by getprotoent() and related functions.
@@ -90,6 +103,12 @@
 #   Shadow user passwords, used by getspnam() and related functions.
 #   *Variant* (defaults to $nsswitch::params::shadow_default)
 #
+# [*shadow_compat*]
+#
+#   Shadow pseudo-database for compatibility mode. This parameter should
+#   only be set if shadow is set to "compat".
+#   *Variant* (defaults to $nsswitch::params::shadow_compat_default)
+#
 # [*sudoers*]
 #
 #   Sudoers policy module users.
@@ -114,23 +133,26 @@
 # Copyright 2013 Thomas Linkin, Marcellus Siegburg
 #
 class nsswitch (
-  Variant[String, Array, Undef] $aliases    = $nsswitch::params::aliases_default,
-  Variant[String, Array, Undef] $automount  = $nsswitch::params::automount_default,
-  Variant[String, Array, Undef] $bootparams = $nsswitch::params::bootparams_default,
-  Variant[String, Array, Undef] $ethers     = $nsswitch::params::ethers_default,
-  Variant[String, Array, Undef] $group      = $nsswitch::params::group_default,
-  Variant[String, Array, Undef] $hosts      = $nsswitch::params::hosts_default,
-  Variant[String, Array, Undef] $netgroup   = $nsswitch::params::netgroup_default,
-  Variant[String, Array, Undef] $netmasks   = $nsswitch::params::netmasks_default,
-  Variant[String, Array, Undef] $networks   = $nsswitch::params::networks_default,
-  Variant[String, Array, Undef] $passwd     = $nsswitch::params::passwd_default,
-  Variant[String, Array, Undef] $protocols  = $nsswitch::params::protocols_default,
-  Variant[String, Array, Undef] $publickey  = $nsswitch::params::publickey_default,
-  Variant[String, Array, Undef] $rpc        = $nsswitch::params::rpc_default,
-  Variant[String, Array, Undef] $services   = $nsswitch::params::services_default,
-  Variant[String, Array, Undef] $shadow     = $nsswitch::params::shadow_default,
-  Variant[String, Array, Undef] $gshadow    = $nsswitch::params::gshadow_default,
-  Variant[String, Array, Undef] $sudoers    = $nsswitch::params::sudoers_default,
+  Variant[String, Array, Undef] $aliases       = $nsswitch::params::aliases_default,
+  Variant[String, Array, Undef] $automount     = $nsswitch::params::automount_default,
+  Variant[String, Array, Undef] $bootparams    = $nsswitch::params::bootparams_default,
+  Variant[String, Array, Undef] $ethers        = $nsswitch::params::ethers_default,
+  Variant[String, Array, Undef] $group         = $nsswitch::params::group_default,
+  Variant[String, Array, Undef] $group_compat  = $nsswitch::params::group_compat_default,
+  Variant[String, Array, Undef] $hosts         = $nsswitch::params::hosts_default,
+  Variant[String, Array, Undef] $netgroup      = $nsswitch::params::netgroup_default,
+  Variant[String, Array, Undef] $netmasks      = $nsswitch::params::netmasks_default,
+  Variant[String, Array, Undef] $networks      = $nsswitch::params::networks_default,
+  Variant[String, Array, Undef] $passwd        = $nsswitch::params::passwd_default,
+  Variant[String, Array, Undef] $passwd_compat = $nsswitch::params::passwd_compat_default,
+  Variant[String, Array, Undef] $protocols     = $nsswitch::params::protocols_default,
+  Variant[String, Array, Undef] $publickey     = $nsswitch::params::publickey_default,
+  Variant[String, Array, Undef] $rpc           = $nsswitch::params::rpc_default,
+  Variant[String, Array, Undef] $services      = $nsswitch::params::services_default,
+  Variant[String, Array, Undef] $shadow        = $nsswitch::params::shadow_default,
+  Variant[String, Array, Undef] $shadow_compat = $nsswitch::params::shadow_compat_default,
+  Variant[String, Array, Undef] $gshadow       = $nsswitch::params::gshadow_default,
+  Variant[String, Array, Undef] $sudoers       = $nsswitch::params::sudoers_default,
 ) inherits nsswitch::params {
 
   file { 'nsswitch.conf':

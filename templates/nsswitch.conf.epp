@@ -2,15 +2,24 @@
 
 <% if $::nsswitch::passwd { -%>
 passwd:     <%= [*$::nsswitch::passwd].join(" ") %>
+<%   if $::nsswitch:passwd[0] == 'compat' { -%>
+passwd_compat: <%= $::nsswitch::passwd_compat %>
+<%   } -%>
 <% } -%>
 <% if $::nsswitch::shadow { -%>
 shadow:     <%= [*$::nsswitch::shadow].join(" ") %>
+<%   if $::nsswitch:shadow[0] == 'compat' { -%>
+shadow_compat: <%= $::nsswitch::shadow_compat %>
+<%   } -%>
 <% } -%>
 <% if $::nsswitch::gshadow { -%>
 gshadow:    <%= [*$::nsswitch::gshadow].join(" ") %>
 <% } -%>
 <% if $::nsswitch::group { -%>
 group:      <%= [*$::nsswitch::group].join(" ") %>
+<%   if $::nsswitch:group[0] == 'compat' { -%>
+group_compat: <%= $::nsswitch::group_compat %>
+<%   } -%>
 <% } -%>
 <% if $::nsswitch::sudoers { -%>
 sudoers:    <%= [*$::nsswitch::sudoers].join(" ") %>
